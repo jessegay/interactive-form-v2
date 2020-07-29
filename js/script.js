@@ -26,5 +26,12 @@ design.addEventListener('change', (event) => {
     color.disabled = false;
 })
 
+// Up next
+/*
+For the T-Shirt "Color" menu, after a user selects a theme, only display the color options that match the design selected in the "Design" menu.
+If the user selects "Theme - JS Puns" then the color menu should only display "Cornflower Blue," "Dark Slate Grey," and "Gold."
+If the user selects "Theme - I ♥ JS" then the color menu should only display "Tomato," "Steel Blue," and "Dim Grey."
+ */
 
-
+ // This seems to work. Set .hidden = true for all the ones I want to hide?
+color.options[1].hidden = true;
