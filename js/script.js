@@ -25,7 +25,7 @@ const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
     //This if statement doesn't hide anything??
-    if (event.target.value == 'Theme - JS Puns') {
+    if (event.target.value == 'js puns') {
         // loop through color and hide options whose text contains '&#9829'
         var i;
          for (i = 0; i < color.length; i++) {
