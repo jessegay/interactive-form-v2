@@ -24,14 +24,30 @@ color.selectedIndex = '0';
 const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
+    //This if statement doesn't hide anything??
+    if (event.target.value == 'Theme - JS Puns') {
+        // loop through color and hide options whose text contains '&#9829'
+        var i;
+         for (i = 0; i < color.length; i++) {
+             if (color.options[i].text.contains('&#9829')) {
+                color.options[i].hidden = true;
+             }                   
+         }
+    } 
+  
 })
+
+
+
 
 // Up next
 /*
 For the T-Shirt "Color" menu, after a user selects a theme, only display the color options that match the design selected in the "Design" menu.
 If the user selects "Theme - JS Puns" then the color menu should only display "Cornflower Blue," "Dark Slate Grey," and "Gold."
 If the user selects "Theme - I ♥ JS" then the color menu should only display "Tomato," "Steel Blue," and "Dim Grey."
- */
+ 
+Instructions say to do this inside the event listener. My attempt starts at line 27 
 
- // This seems to work. Set .hidden = true for all the ones I want to hide?
-color.options[1].hidden = true;
+
+*/
+
