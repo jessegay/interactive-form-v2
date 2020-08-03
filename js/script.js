@@ -24,18 +24,34 @@ color.selectedIndex = '0';
 const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
-    //This if statement doesn't hide anything??
+    //If user selects Puns, ♥ options are hidden
     if (event.target.value == 'js puns') {
-        // loop through color and hide options whose text contains '&#9829'
+        // loop through color and hide options whose text contains '♥' (for some reason I can't use the decimal equivalent)
         var i;
          for (i = 0; i < color.length; i++) {
-             if (color.options[i].text.includes('♥')) {
+            if (color.options[i].text.includes('♥')) {
                 color.options[i].hidden = true;
-             }                   
-         }
+            }   else {
+                color.options[i].hidden = false;
+            }                  
+        } 
+    }  
+
+    if (event.target.value == 'heart js') {
+        // loop through color and hide options whose text contains puns
+        var i;
+        for (i = 0; i < color.length; i++) {
+            if (color.options[i].text.includes('Puns')) {
+                color.options[i].hidden = true;
+            }   else {
+                color.options[i].hidden = false;
+            }                  
+        }
     } 
   
 })
+
+
 
 
 
