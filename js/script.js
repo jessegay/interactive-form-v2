@@ -29,7 +29,7 @@ design.addEventListener('change', (event) => {
         // loop through color and hide options whose text contains '&#9829'
         var i;
          for (i = 0; i < color.length; i++) {
-             if (color.options[i].text.includes('&#9829')) {
+             if (color.options[i].text.includes('♥')) {
                 color.options[i].hidden = true;
              }                   
          }
