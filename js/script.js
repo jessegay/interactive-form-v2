@@ -24,6 +24,8 @@ color.selectedIndex = '0';
 const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
+    //Resets the color select to the placeholder (so when user changes theme, they are prompted to chose again)
+    color.selectedIndex = '0';
     //If user selects Puns, ♥ options are hidden
     if (event.target.value == 'js puns') {
         // loop through color and hide options whose text contains '♥' (for some reason I can't use the decimal equivalent)
@@ -36,7 +38,7 @@ design.addEventListener('change', (event) => {
             }                  
         } 
     }  
-
+    //If user selects ♥, Puns options are hidden
     if (event.target.value == 'heart js') {
         // loop through color and hide options whose text contains puns
         var i;
@@ -64,6 +66,7 @@ If the user selects "Theme - I ♥ JS" then the color menu should only display "
  
 Instructions say to do this inside the event listener. My attempt starts at line 27 
 
-
+When a new theme is selected from the "Design" menu, both the "Color" field and drop down menu is updated. Hmmmm, the 
+options are limited correctly, but I need to find a way to reset the color field to colorOptions[0]
 */
 
