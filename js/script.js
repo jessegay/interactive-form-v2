@@ -61,13 +61,13 @@ If the user selects "Theme - I ♥ JS" then the color menu should only display "
 Instructions say to do this inside the event listener. My attempt starts at line 27 
 */
 
-// Up next
+
 /*
 Some events are at the same day and time as others. If the user selects a workshop, don't allow selection of a workshop at the same day and time -- 
 you should disable the checkbox and visually indicate that the workshop in the competing time slot isn't available.
 
 When a user unchecks an activity, make sure that competing activities (if there are any) are no longer disabled.
-
+// Up next
 As a user selects activities, a running total should display below the list of checkboxes. 
 For example, if the user selects "Main Conference", then Total: $200 should appear. 
 If they add 1 workshop, the total should change to Total: $300.
