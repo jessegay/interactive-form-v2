@@ -78,7 +78,6 @@ data-day-and-time="Tuesday 1pm-4pm"
 */
 //create array to store all checkboxes
 const checkboxes = document.querySelectorAll('.activities input');
-//console.log(checkboxes);
 document.querySelector('.activities').addEventListener('change', (e) => {
     const clicked = e.target;
     const clickedType = e.target.getAttribute('data-day-and-time');
@@ -93,13 +92,4 @@ document.querySelector('.activities').addEventListener('change', (e) => {
         }
 
     }
-
-
-
-
-
-
-
-
-
 })
