@@ -1,3 +1,5 @@
+// Create variable to store total cost. Does it need to be global?
+let totalCost = 0;
 // give "name" field command focus on load.
 const name = document.getElementById("name");
 name.focus();
@@ -79,8 +81,10 @@ data-day-and-time="Tuesday 1pm-4pm"
 //create array to store all checkboxes
 const checkboxes = document.querySelectorAll('.activities input');
 document.querySelector('.activities').addEventListener('change', (e) => {
+    totalCost = 0;
     const clicked = e.target;
     const clickedType = e.target.getAttribute('data-day-and-time');
+    const cost = parseInt(e.target.getAttribute('data-cost'));
     for (let i = 0; i < checkboxes.length; i ++) {
         let checkboxType = checkboxes[i].getAttribute('data-day-and-time');
         if (clickedType === checkboxType && clicked !== checkboxes[i]) {
@@ -90,6 +94,29 @@ document.querySelector('.activities').addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
             }
         }
-
+// FIXME: This almost works, but the logic is off.
+        if (checkboxes[i].checked) {
+            totalCost += cost;
+            console.log(totalCost);
+        }
     }
 })
+
+
+/*
+pseudocode
+Every time event listener is triggered on checkboxes, loop through.
+If checkboxes[i].checked
+add cost to total cost.
+
+Might need to reset totalCost to 0 before each loop.
+
+Need to create field or div to display this running total.
+*/
+/*
+As a user selects activities, a running total should display below the list
+ of checkboxes. For example, if the user selects "Main Conference", then 
+ Total: $200 should appear. If they add 1 workshop, the total should change 
+ to Total: $300.
+*/
+
