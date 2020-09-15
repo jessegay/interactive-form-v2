@@ -104,7 +104,7 @@ document.querySelector('.activities').addEventListener('change', (e) => {
     totalCost = 0;
     const clicked = e.target;
     const clickedType = e.target.getAttribute('data-day-and-time');
-    const cost = parseInt(e.target.getAttribute('data-cost'));
+    //const cost = parseInt(e.target.getAttribute('data-cost'));
     for (let i = 0; i < checkboxes.length; i ++) {
         let checkboxType = checkboxes[i].getAttribute('data-day-and-time');
         if (clickedType === checkboxType && clicked !== checkboxes[i]) {
@@ -116,6 +116,7 @@ document.querySelector('.activities').addEventListener('change', (e) => {
         }
 // FIXME: This almost works, but Main Conference breaks it. Is it bc it doesn't have  data-day-and-time?
         if (checkboxes[i].checked) {
+            const cost = parseInt(checkboxes[i].getAttribute('data-cost'));
             totalCost += cost;
             console.log(totalCost);
         }
