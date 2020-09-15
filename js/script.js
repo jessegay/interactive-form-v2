@@ -1,5 +1,25 @@
 // Create variable to store total cost. Does it need to be global?
 let totalCost = 0;
+
+// Create div for cost
+const costDiv = document.createElement('div');
+const costLabel = document.createElement('label');
+costLabel.textContent = 'Cost($)';
+costLabel.style.backgroundColor = '#6F9DDC';
+costLabel.style.borderTopLeftRadius = '4px';
+costLabel.style.borderTopRightRadius = '4px';
+costDiv.appendChild(costLabel);
+costDiv.style.backgroundColor = 'white';
+costDiv.style.display = 'inLine-block';
+costDiv.style.borderRadius = '4px';
+//costDiv.insertAdjacentHTML('afterbegin', '<label for="cost">Cost($):</label>');
+
+const placeholderCost = document.createTextNode('0');
+costDiv.appendChild(placeholderCost);
+const activities = document.getElementsByClassName('activities');
+const lastActivity = activities[activities.length - 1];
+lastActivity.appendChild(costDiv);
+
 // give "name" field command focus on load.
 const name = document.getElementById("name");
 name.focus();
@@ -94,11 +114,13 @@ document.querySelector('.activities').addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
             }
         }
-// FIXME: This almost works, but the logic is off.
+// FIXME: This almost works, but Main Conference breaks it. Is it bc it doesn't have  data-day-and-time?
         if (checkboxes[i].checked) {
             totalCost += cost;
             console.log(totalCost);
         }
+        //insert totalCost in costDiv
+        placeholderCost.textContent = totalCost;
     }
 })
 
