@@ -114,7 +114,7 @@ document.querySelector('.activities').addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
             }
         }
-// FIXME: This almost works, but Main Conference breaks it. Is it bc it doesn't have  data-day-and-time?
+        // Calculate totalCost
         if (checkboxes[i].checked) {
             const cost = parseInt(checkboxes[i].getAttribute('data-cost'));
             totalCost += cost;
