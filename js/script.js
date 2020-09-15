@@ -131,7 +131,7 @@ Every time event listener is triggered on checkboxes, loop through.
 If checkboxes[i].checked
 add cost to total cost.
 
-Might need to reset totalCost to 0 before each loop.
+Reset totalCost to 0 before each loop.
 
 Need to create field or div to display this running total.
 */
