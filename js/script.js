@@ -143,3 +143,40 @@ As a user selects activities, a running total should display below the list
  to Total: $300.
 */
 
+/*
+"Payment Info" section
+Display payment sections based on the payment option chosen in the select 
+menu. The "Credit Card" payment option should be selected by default. 
+Display the #credit-card div, and hide the "PayPal" and "Bitcoin" information. 
+Payment option in the select menu should match the payment option displayed on the page.
+When a user selects the "PayPal" payment option, the PayPal information should display,
+and the credit card and “Bitcoin” information should be hidden.
+When a user selects the "Bitcoin" payment option, the Bitcoin information 
+should display, and the credit card and “PayPal” information should be hidden.
+NOTE: The user should not be able to select the "Select Payment Method" option 
+from the payment select menu, because the user should not be able to submit 
+the form without a chosen payment option. */
+
+
+// Create const to store payment info select
+const payment = document.getElementById('payment');
+// store each payment div
+const creditCardDiv = document.getElementById('credit-card');
+const paypalDiv = document.getElementById('paypal');
+const bitcoinDiv = document.getElementById('bitcoin');
+const paymentDivs = [creditCardDiv, paypalDiv, bitcoinDiv];
+console.log(payment);
+console.log(paymentDivs);
+// Add event listener to it. Loop through paymentDivs. 
+// If paymentDivs[i].id == event.target.value, paymentDivs[i].hidden = false, else = true
+payment.addEventListener('change', (e) => {
+        var i;
+        for (i = 0; i < paymentDivs.length; i++) {
+            if (paymentDivs[i].id.includes(e.target.value)) {
+                paymentDivs[i].hidden = false; 
+                } else {
+                    paymentDivs[i].hidden = true;
+                }
+            }
+    })
+// FIXME: Almost works, but case creditcard doesn't, probably because credit-card != credit card.
