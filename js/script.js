@@ -164,12 +164,14 @@ const payment = document.getElementById('payment');
 const creditCardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
+// Create array of all payment divs
 const paymentDivs = [creditCardDiv, paypalDiv, bitcoinDiv];
 console.log(payment);
 console.log(paymentDivs);
 // Add event listener to it. Loop through paymentDivs. 
 // If paymentDivs[i].id == event.target.value, paymentDivs[i].hidden = false, else = true
 payment.addEventListener('change', (e) => {
+        console.log(e.target.value);
         var i;
         for (i = 0; i < paymentDivs.length; i++) {
             if (paymentDivs[i].id.includes(e.target.value)) {
