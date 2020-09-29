@@ -158,20 +158,25 @@ from the payment select menu, because the user should not be able to submit
 the form without a chosen payment option. */
 
 
+
 // Create const to store payment info select
 const payment = document.getElementById('payment');
+// Make "select method" unselectable
+payment[0].disabled = true;
+// Select Credit Card by default
+payment[1].selected = true;
 // store each payment div
 const creditCardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
+// hide options other than credit-card
+paypalDiv.hidden = true;
+bitcoinDiv.hidden = true;
 // Create array of all payment divs
 const paymentDivs = [creditCardDiv, paypalDiv, bitcoinDiv];
-console.log(payment);
-console.log(paymentDivs);
 // Add event listener to it. Loop through paymentDivs. 
 // If paymentDivs[i].id == event.target.value, paymentDivs[i].hidden = false, else = true
 payment.addEventListener('change', (e) => {
-        console.log(e.target.value);
         var i;
         for (i = 0; i < paymentDivs.length; i++) {
             if (paymentDivs[i].id.includes(e.target.value)) {
@@ -181,4 +186,5 @@ payment.addEventListener('change', (e) => {
                 }
             }
     })
-// FIXME: Almost works, but case creditcard doesn't, probably because credit-card != credit card.
+
+    
