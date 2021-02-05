@@ -1,6 +1,28 @@
 // Create variable to store total cost. Does it need to be global?
 let totalCost = 0;
 
+// Variables to store form inputs
+const form = document.querySelector('form');
+const name = document.querySelector('#name');
+const email = document.querySelector('#email');
+const activities = document.querySelector('.activites');
+// Might have to use querySelectorAll(.activities input)
+
+/* Helper function to validate name input */
+// FIXME: Why is name deprecated? Is it a keyword? If so, then warmup needs to be fixed
+const nameValidator = () => {
+    const userName = name.value;
+    console.log(userName);
+
+    if(userName.length > 0) {
+        name.style.borderColor = 'green';
+        return true;
+    }
+    else {
+        name.style.borderColor = 'red';
+        return false;
+    }
+}
 // Create div for cost
 const costDiv = document.createElement('div');
 const costLabel = document.createElement('label');
@@ -187,4 +209,16 @@ payment.addEventListener('change', (e) => {
             }
     })
 
-    
+/* Submit listener on the form element */
+form.addEventListener('submit', (e) => {
+    nameValidator();
+
+    if (!nameValidator()) {
+        e.preventDefault();
+        console.log('There is a problem with the name input which prevented submission');
+    }
+
+
+
+}    
+)
