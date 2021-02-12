@@ -3,23 +3,24 @@ let totalCost = 0;
 
 // Variables to store form inputs
 const form = document.querySelector('form');
-const name = document.querySelector('#name');
+const nameInput = document.querySelector('#name');
 const email = document.querySelector('#email');
-const activities = document.querySelector('.activites');
+//const activitiesClass = document.querySelector('.activities');
+//console.log(activitiesClass);
 // Might have to use querySelectorAll(.activities input)
 
 /* Helper function to validate name input */
 // FIXME: Why is name deprecated? Is it a keyword? If so, then warmup needs to be fixed
 const nameValidator = () => {
-    const userName = name.value;
+    const userName = nameInput.value;
     console.log(userName);
 
     if(userName.length > 0) {
-        name.style.borderColor = 'green';
+        //nameInput.style.borderColor = 'purple';
         return true;
     }
     else {
-        name.style.borderColor = 'red';
+        nameInput.style.borderColor = 'red';
         return false;
     }
 }
@@ -42,9 +43,9 @@ const activities = document.getElementsByClassName('activities');
 const lastActivity = activities[activities.length - 1];
 lastActivity.appendChild(costDiv);
 
-// give "name" field command focus on load.
-const name = document.getElementById("name");
-name.focus();
+// give "name" field command focus on load. Can I use nameInput that I declared earlier?
+//const name = document.getElementById("name");
+nameInput.focus();
 
 //Hide "job_role_other"
 const other = document.getElementById("other-title");
@@ -220,5 +221,4 @@ form.addEventListener('submit', (e) => {
 
 
 
-}    
-)
+}    );
