@@ -4,19 +4,20 @@ let totalCost = 0;
 // Variables to store form inputs
 const form = document.querySelector('form');
 const nameInput = document.querySelector('#name');
-const email = document.querySelector('#email');
-//const activitiesClass = document.querySelector('.activities');
+const email = document.querySelector('#mail');
+const activitiesInputs = document.querySelectorAll('.activities input');
+const activitiesFieldset = document.querySelector('.activities');
+activitiesFieldset.style.borderColor = 'purple';
 //console.log(activitiesClass);
 // Might have to use querySelectorAll(.activities input)
 
+// Validator helper functions. Might move these down later.
 /* Helper function to validate name input */
-// FIXME: Why is name deprecated? Is it a keyword? If so, then warmup needs to be fixed
 const nameValidator = () => {
     const userName = nameInput.value;
     console.log(userName);
 
     if(userName.length > 0) {
-        //nameInput.style.borderColor = 'purple';
         return true;
     }
     else {
@@ -24,6 +25,44 @@ const nameValidator = () => {
         return false;
     }
 }
+
+/* Helper function to validate email input */
+const emailValidator = () => {
+    const emailValue = email.value;
+    const indexOfAt = emailValue.indexOf('@');
+    const indexOfDot = emailValue.lastIndexOf('.');
+    // check to see if email value has an @ before .
+    if (indexOfAt > 1 && indexOfDot > (indexOfAt +1)) {
+        return true;
+    }   else {
+        email.style.borderColor = 'red';
+        return false;
+    }
+
+}
+
+/* Helper function to validate that at least 1 activity has been selected*/
+
+const activitiesValidator = () => {
+    for (let i = 0; i < activitiesInputs.length; i ++ ) {
+        if (activitiesInputs[i].checked) {
+            console.log('You have picked an activity');
+            return true;
+        }
+    }
+
+    //FIXME: Why can't I set some visual attribute to red if the method fails?
+    for (let i = 0; i < activitiesInputs.length; i ++ ) {
+        activitiesInputs[i].style.color = 'red';
+        //return false;
+    }
+    
+    return false;
+}
+
+
+
+
 // Create div for cost
 const costDiv = document.createElement('div');
 const costLabel = document.createElement('label');
@@ -213,12 +252,20 @@ payment.addEventListener('change', (e) => {
 /* Submit listener on the form element */
 form.addEventListener('submit', (e) => {
     nameValidator();
-
+    emailValidator();
+    activitiesValidator();
+    // if/else results of validator methods
     if (!nameValidator()) {
         e.preventDefault();
         console.log('There is a problem with the name input which prevented submission');
     }
-
-
+    else if (!emailValidator()) {
+        e.preventDefault();
+        console.log('There is problem with the email input which prevented submission');
+    }
+    else if (!activitiesValidator()) {
+        e.preventDefault();
+        console.log('You must select at least one Activity');
+    }
 
 }    );
