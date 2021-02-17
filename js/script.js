@@ -7,9 +7,8 @@ const nameInput = document.querySelector('#name');
 const email = document.querySelector('#mail');
 const activitiesInputs = document.querySelectorAll('.activities input');
 const activitiesFieldset = document.querySelector('.activities');
-activitiesFieldset.style.borderColor = 'purple';
-//console.log(activitiesClass);
-// Might have to use querySelectorAll(.activities input)
+//activitiesFieldset.style.borderColor = 'purple';
+//console.log(activitiesFieldset);
 
 // Validator helper functions. Might move these down later.
 /* Helper function to validate name input */
@@ -50,13 +49,8 @@ const activitiesValidator = () => {
             return true;
         }
     }
-
-    //FIXME: Why can't I set some visual attribute to red if the method fails?
-    for (let i = 0; i < activitiesInputs.length; i ++ ) {
-        activitiesInputs[i].style.color = 'red';
-        //return false;
-    }
-    
+    //This will run only if the loop concludes without finding any checked activites.
+    activitiesFieldset.style.backgroundColor = 'red';
     return false;
 }
 
