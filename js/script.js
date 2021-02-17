@@ -56,7 +56,6 @@ const activitiesValidator = () => {
 
 
 
-
 // Create div for cost
 const costDiv = document.createElement('div');
 const costLabel = document.createElement('label');
@@ -243,11 +242,29 @@ payment.addEventListener('change', (e) => {
             }
     })
 
+/* Helper function for CC Validation If the selected payment option is "Credit Card," make sure the user has supplied a Credit Card number, a Zip Code, and a 3 number CVV value before the form can be submitted.
+Credit Card field should only accept a number between 13 and 16 digits.
+The Zip Code field should accept a 5-digit number.
+The CVV should only accept a number that is exactly 3 digits long. */
+
+const creditCardValidator = () => {
+    console.log('You are paying with Credit Card');
+    const cardNumber = document.querySelector('#cc-num');
+    const zip = document.querySelector('zip');
+    const cvv = document.querySelector('cvv');
+}
+
+
+
+
 /* Submit listener on the form element */
 form.addEventListener('submit', (e) => {
     nameValidator();
     emailValidator();
     activitiesValidator();
+    if (payment.value == 'credit-card') {
+        creditCardValidator();
+    }
     // if/else results of validator methods
     if (!nameValidator()) {
         e.preventDefault();
