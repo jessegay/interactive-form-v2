@@ -249,9 +249,14 @@ The CVV should only accept a number that is exactly 3 digits long. */
 
 const creditCardValidator = () => {
     console.log('You are paying with Credit Card');
-    const cardNumber = document.querySelector('#cc-num');
+    const cardNumber = document.querySelector('#cc-num').value;
     const zip = document.querySelector('zip');
     const cvv = document.querySelector('cvv');
+
+    console.log(cardNumber);
+    // if (cardNumber.value.length <= 16 && cardNumber.value >= 13 && cardNumber.value.typeOf === 'number') {
+    //     console.log('your CC number is legit');
+    // }
 }
 
 
