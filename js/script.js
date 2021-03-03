@@ -76,7 +76,6 @@ const lastActivity = activities[activities.length - 1];
 lastActivity.appendChild(costDiv);
 
 // give "name" field command focus on load. Can I use nameInput that I declared earlier?
-//const name = document.getElementById("name");
 nameInput.focus();
 
 //Hide "job_role_other"
@@ -149,9 +148,6 @@ As a user selects activities, a running total should display below the list of c
 For example, if the user selects "Main Conference", then Total: $200 should appear. 
 If they add 1 workshop, the total should change to Total: $300.
 
-data-day-and-time="Tuesday 9am-12pm"
-data-day-and-time="Tuesday 1pm-4pm"
-
 */
 //create array to store all checkboxes
 const checkboxes = document.querySelectorAll('.activities input');
@@ -159,7 +155,6 @@ document.querySelector('.activities').addEventListener('change', (e) => {
     totalCost = 0;
     const clicked = e.target;
     const clickedType = e.target.getAttribute('data-day-and-time');
-    //const cost = parseInt(e.target.getAttribute('data-cost'));
     for (let i = 0; i < checkboxes.length; i ++) {
         let checkboxType = checkboxes[i].getAttribute('data-day-and-time');
         if (clickedType === checkboxType && clicked !== checkboxes[i]) {
@@ -255,7 +250,7 @@ const creditCardValidator = () => {
         console.log('your CC number is legit');
         return true;
     } else {
-        console.log('There is a problem with your credit card info');
+        console.log('There is a problem with your credit card number');
         cardNumber.style.borderColor = 'red';
         return false;
     }
@@ -271,9 +266,15 @@ const zipValidator = () => {
     }
 }
 
-// const cvvValidator = () => {
-//     const cvv = document.querySelector('#cvv');    
-// }
+const cvvValidator = () => {
+    const cvv = document.querySelector('#cvv');   
+    if (cvv.value.length === 3 && typeof parseInt(cvv.value) === 'number') {
+        return true;
+    } else {
+        cvv.style.borderColor = 'red';
+        return false;
+    }
+}
 
 /* Submit listener on the form element */
 form.addEventListener('submit', (e) => {
@@ -283,7 +284,7 @@ form.addEventListener('submit', (e) => {
     if (payment.value == 'credit-card') {
         creditCardValidator();
         zipValidator();
-        //cvvValidator();
+        cvvValidator();
     }
     // if/else results of validator methods
     if (!nameValidator()) {
