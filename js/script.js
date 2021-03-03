@@ -261,6 +261,7 @@ const zipValidator = () => {
     if (zip.value.length === 5 && typeof parseInt(zip.value) === 'number') {
         return true;
     } else {
+        console.log('There is a problem with your zipcode');
         zip.style.borderColor = 'red';
         return false;
     }
@@ -271,6 +272,7 @@ const cvvValidator = () => {
     if (cvv.value.length === 3 && typeof parseInt(cvv.value) === 'number') {
         return true;
     } else {
+        console.log('There is a problem with your CVV');
         cvv.style.borderColor = 'red';
         return false;
     }
