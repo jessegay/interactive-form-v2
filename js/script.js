@@ -21,6 +21,11 @@ const nameValidator = () => {
     }
     else {
         nameInput.style.borderColor = 'red';
+        const nameErrorDiv = document.createElement('div');
+        const nameErrorLabel = document.createElement('label');
+        nameErrorLabel.classList.add('error');
+        nameErrorLabel.textContent = 'Please enter a name';
+        nameInput.insertAdjacentElement('afterend', nameErrorLabel);
         return false;
     }
 }

@@ -166,6 +166,12 @@ option {
 	border-radius: 4px;
 }
 
+/*Adding a class for errors*/
+.error {
+	background:#ebcf82;
+	font-size: 1.2em;
+}
+
 /* ================================= 
   Helper Classes
 ==================================== */
