@@ -7,57 +7,6 @@ const nameInput = document.querySelector('#name');
 const email = document.querySelector('#mail');
 const activitiesInputs = document.querySelectorAll('.activities input');
 const activitiesFieldset = document.querySelector('.activities');
-//activitiesFieldset.style.borderColor = 'purple';
-//console.log(activitiesFieldset);
-
-// Validator helper functions. Might move these down later.
-/* Helper function to validate name input */
-const nameValidator = () => {
-    const userName = nameInput.value;
-    console.log(userName);
-
-    if(userName.length > 0) {
-        return true;
-    }
-    else {
-        nameInput.style.borderColor = 'red';
-        const nameErrorDiv = document.createElement('div');
-        const nameErrorLabel = document.createElement('label');
-        nameErrorLabel.classList.add('error');
-        nameErrorLabel.textContent = 'Please enter a name';
-        nameInput.insertAdjacentElement('afterend', nameErrorLabel);
-        return false;
-    }
-}
-
-/* Helper function to validate email input */
-const emailValidator = () => {
-    const emailValue = email.value;
-    const indexOfAt = emailValue.indexOf('@');
-    const indexOfDot = emailValue.lastIndexOf('.');
-    // check to see if email value has an @ before .
-    if (indexOfAt > 1 && indexOfDot > (indexOfAt +1)) {
-        return true;
-    }   else {
-        email.style.borderColor = 'red';
-        return false;
-    }
-
-}
-
-/* Helper function to validate that at least 1 activity has been selected*/
-
-const activitiesValidator = () => {
-    for (let i = 0; i < activitiesInputs.length; i ++ ) {
-        if (activitiesInputs[i].checked) {
-            console.log('You have picked an activity');
-            return true;
-        }
-    }
-    //This will run only if the loop concludes without finding any checked activites.
-    activitiesFieldset.style.backgroundColor = 'red';
-    return false;
-}
 
 
 
@@ -72,7 +21,6 @@ costDiv.appendChild(costLabel);
 costDiv.style.backgroundColor = 'white';
 costDiv.style.display = 'inLine-block';
 costDiv.style.borderRadius = '4px';
-//costDiv.insertAdjacentHTML('afterbegin', '<label for="cost">Cost($):</label>');
 
 const placeholderCost = document.createTextNode('0');
 costDiv.appendChild(placeholderCost);
@@ -106,6 +54,7 @@ const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
     //Resets the color select to the placeholder (so when user changes theme, they are prompted to chose again)
+    //FIXME: Shouln't Color select now say "Please select a color"?
     color.selectedIndex = '0';
     //If user selects Puns, ♥ options are hidden
     if (event.target.value == 'js puns') {
@@ -242,6 +191,56 @@ payment.addEventListener('change', (e) => {
             }
     })
 
+
+// Validator helper functions.
+/* Helper function to validate name input */
+const nameValidator = () => {
+    const userName = nameInput.value;
+    console.log(userName);
+
+    if(userName.length > 0) {
+        return true;
+    } else {
+        nameInput.style.borderColor = 'red';
+        const nameErrorDiv = document.createElement('div');
+        const nameErrorLabel = document.createElement('label');
+        nameErrorLabel.classList.add('error');
+        nameErrorLabel.textContent = 'Please enter a name';
+        nameInput.insertAdjacentElement('afterend', nameErrorLabel);
+        return false;
+    }
+}
+
+/* Helper function to validate email input */
+const emailValidator = () => {
+    const emailValue = email.value;
+    const indexOfAt = emailValue.indexOf('@');
+    const indexOfDot = emailValue.lastIndexOf('.');
+    // check to see if email value has an @ before .
+    if (indexOfAt > 1 && indexOfDot > (indexOfAt +1)) {
+        return true;
+    }   else {
+        email.style.borderColor = 'red';
+        return false;
+    }
+
+}
+
+/* Helper function to validate that at least 1 activity has been selected*/
+
+const activitiesValidator = () => {
+    for (let i = 0; i < activitiesInputs.length; i ++ ) {
+        if (activitiesInputs[i].checked) {
+            console.log('You have picked an activity');
+            return true;
+            } 
+        }   
+    //This will run only if the loop concludes without finding any checked activites.
+    activitiesFieldset.style.backgroundColor = 'red';
+    return false;
+}
+
+
 /* Helper function for CC Validation If the selected payment option is "Credit Card," make sure the user has supplied a Credit Card number, a Zip Code, and a 3 number CVV value before the form can be submitted.
 Credit Card field should only accept a number between 13 and 16 digits.
 The Zip Code field should accept a 5-digit number.
@@ -306,6 +305,18 @@ form.addEventListener('submit', (e) => {
         e.preventDefault();
         console.log('You must select at least one Activity');
     }
+    // Do the creditCard checks need to be in their own branch, or is this OK since they'll only be called if credit-card is selected?
+    else if  (!creditCardValidator()) {
+        e.preventDefault();
+    }    
+    else if  (!zipValidator()) {
+        e.preventDefault();
+    } 
+    else if  (!cvvValidator()) {
+        e.preventDefault();
+    } 
+
+
     else {
         console.log('inputs look good');
     }
