@@ -284,35 +284,36 @@ const cvvValidator = () => {
 
 /* Submit listener on the form element */
 form.addEventListener('submit', (e) => {
-    nameValidator();
-    emailValidator();
-    activitiesValidator();
+    // Trying Marie's suggestion with nameValidator()
+    const isValidName = nameValidator();
+    const isValidEmail = emailValidator();
+    const isActivityPicked = activitiesValidator();
     if (payment.value == 'credit-card') {
-        creditCardValidator();
-        zipValidator();
-        cvvValidator();
+        const isValidCreditCardNumber = creditCardValidator();
+        const isValidZip = zipValidator();
+        const isValidCVV = cvvValidator();
     }
     // if/else results of validator methods
-    if (!nameValidator()) {
+    if (!isValidName) {
         e.preventDefault();
         console.log('There is a problem with the name input which prevented submission');
     }
-    else if (!emailValidator()) {
+    else if (!isValidEmail) {
         e.preventDefault();
         console.log('There is problem with the email input which prevented submission');
     }
-    else if (!activitiesValidator()) {
+    else if (!isActivityPicked) {
         e.preventDefault();
         console.log('You must select at least one Activity');
     }
     // Do the creditCard checks need to be in their own branch, or is this OK since they'll only be called if credit-card is selected?
-    else if  (!creditCardValidator()) {
+    else if  (!isValidCreditCardNumber) {
         e.preventDefault();
     }    
-    else if  (!zipValidator()) {
+    else if  (!isValidZip) {
         e.preventDefault();
     } 
-    else if  (!cvvValidator()) {
+    else if  (!isValidCVV) {
         e.preventDefault();
     } 
 
