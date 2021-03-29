@@ -240,6 +240,10 @@ const activitiesValidator = () => {
         }   
     //This will run only if the loop concludes without finding any checked activites.
     activitiesFieldset.style.backgroundColor = 'red';
+    const activitiesErrorLabel = document.createElement('label');
+    activitiesErrorLabel.classList.add('error');
+    activitiesErrorLabel.textContent = 'Please select at least one activity';
+    activitiesFieldset.insertAdjacentElement('afterend', activitiesErrorLabel);
     return false;
 }
 
