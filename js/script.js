@@ -202,7 +202,6 @@ const nameValidator = () => {
         return true;
     } else {
         nameInput.style.borderColor = 'red';
-        const nameErrorDiv = document.createElement('div');
         const nameErrorLabel = document.createElement('label');
         nameErrorLabel.classList.add('error');
         nameErrorLabel.textContent = 'Please enter a name';
@@ -221,6 +220,10 @@ const emailValidator = () => {
         return true;
     }   else {
         email.style.borderColor = 'red';
+        const emailErrorLabel = document.createElement('label');
+        emailErrorLabel.classList.add('error');
+        emailErrorLabel.textContent = 'Please enter a valid email address';
+        email.insertAdjacentElement('afterend', emailErrorLabel);
         return false;
     }
 
