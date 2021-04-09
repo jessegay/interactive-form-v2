@@ -194,7 +194,7 @@ payment.addEventListener('change', (e) => {
 
 // Validator helper functions.
 
-// Error helper function for Validators
+// Error helper functions for Validators
 
 function addError(parentElement, field) {
     parentElement.style.borderColor = 'red';
@@ -204,12 +204,25 @@ function addError(parentElement, field) {
     parentElement.insertAdjacentElement('afterend', errorLabel);
 }
 
+function removeError(parentElement) {
+    const errorLabel = document.querySelector('.error');
+    parentElement.style.borderColor = 'green';
+    if(errorLabel) {
+        errorLabel.parentNode.removeChild(errorLabel);
+    }
+}
 /* Helper function to validate name input */
 const nameValidator = () => {
     const userName = nameInput.value;
     console.log(userName);
 
     if(userName.length > 0) {
+        // const errorLabel = document.querySelector('.error');
+        // nameInput.style.borderColor = 'green';
+        // if(errorLabel) {
+        //     errorLabel.parentNode.removeChild(errorLabel);
+        // }
+        removeError(nameInput)
         return true;
     } else {
         // nameInput.style.borderColor = 'red';
