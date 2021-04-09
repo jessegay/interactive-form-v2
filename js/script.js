@@ -193,6 +193,17 @@ payment.addEventListener('change', (e) => {
 
 
 // Validator helper functions.
+
+// Error helper function for Validators
+
+function addError(parentElement, field) {
+    parentElement.style.borderColor = 'red';
+    const errorLabel = document.createElement('label');
+    errorLabel.classList.add('error');
+    errorLabel.textContent = `Please enter a valid ${field}`;
+    parentElement.insertAdjacentElement('afterend', errorLabel);
+}
+
 /* Helper function to validate name input */
 const nameValidator = () => {
     const userName = nameInput.value;
@@ -201,15 +212,19 @@ const nameValidator = () => {
     if(userName.length > 0) {
         return true;
     } else {
-        nameInput.style.borderColor = 'red';
-        const nameErrorLabel = document.createElement('label');
-        nameErrorLabel.classList.add('error');
-        nameErrorLabel.textContent = 'Please enter a name';
-        nameInput.insertAdjacentElement('afterend', nameErrorLabel);
+        // nameInput.style.borderColor = 'red';
+        // const nameErrorLabel = document.createElement('label');
+        // nameErrorLabel.classList.add('error');
+        // nameErrorLabel.textContent = 'Please enter a name';
+        // nameInput.insertAdjacentElement('afterend', nameErrorLabel);
+        addError(nameInput, 'name');
         return false;
     }
 }
-
+// Event listener to quickly test validations. Do I want in final or is this just diagnostic?
+nameInput.addEventListener("keyup", () => {
+    nameValidator();
+})
 /* Helper function to validate email input */
 const emailValidator = () => {
     const emailValue = email.value;

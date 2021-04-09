@@ -1,0 +1,45 @@
+So I really like the label and stylings that you have added to make it clear to the user that there is an error. A great way to quickly test your validations is to wrap your validator inside of an event listener like:
+nameInput.addEventListener("keyup", () => {
+    nameValidator();
+})
+You can place this right below the validator function itself. The logic you have is set up really well, and I think you are onto something, as reluctant as you may feel about it. :thumbsup::skin-tone-2:
+With the way you have it set up, an approach I would suggest is to add a couple things inside the if block of the nameValidator function:
+Create a variable that selects the error label from the DOM and stores it. Like:const errorLabel = document.querySelector('.error');
+Then make another if statement to test that variable.
+Inside the block of that if, you can set the border to a different color than red, to indicate that it is correct and then remove the error label from the DOM.
+Since you have inserted the label into the middle of the list of elements among that fieldset, I think a quick way to remove it is to select its parent and then remove it from its parent. Something like this would accomplish that:
+    errorLabel.parentNode.removeChild(errorLabel);
+So rather than resetting all the styles of the input you can just remove the label altogether and then change the border color :highfive:
+And one thing I have seen is to make a helper function that handles the error labeling. You could maybe make an addError and removeError function, and then in each you could accept parameters like parentElement and field. Then you could call that function inside your else block for example, and pass appropriate arguments.
+addError( parentElement, field ){
+        parentElement.style.borderColor = 'red';
+        const errorLabel = document.createElement('label');
+        errorLabel.classList.add('error');
+        errorLabel.textContent = 'Please enter a ${field}';
+        parentElement.insertAdjacentElement('afterend', errorLabel);
+}
+Then you could call the function in the validator like:
+} else {
+  addError( nameInput, "name" );
+}
+This isn’t a 100% sound example, but I hope it helps with some ideas :relaxed:
+Here is what this approach I suggested above looks like in the browser.
+I hope this helps answer your questions!
+2021-03-19 08.46.10.gif 
+2021-03-19 08.46.10.gif
+
+
+
+
+Reply…
+
+
+
+
+
+
+
+
+
+
+
