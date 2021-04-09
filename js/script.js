@@ -206,9 +206,11 @@ function addError(parentElement, field) {
 
 function removeError(parentElement) {
     const errorLabel = document.querySelector('.error');
+    // I'd think const errorLabel = parentElement.querySelector('.error'); would ensure that only the correct error is selected, but it's not working
     parentElement.style.borderColor = 'green';
     if(errorLabel) {
         errorLabel.parentNode.removeChild(errorLabel);
+        console.log(`${errorLabel.textContent} has been referenced`);
     }
 }
 /* Helper function to validate name input */
@@ -245,13 +247,16 @@ const emailValidator = () => {
     const indexOfDot = emailValue.lastIndexOf('.');
     // check to see if email value has an @ before .
     if (indexOfAt > 1 && indexOfDot > (indexOfAt +1)) {
+        removeError(email);
+        //FIXME: removeError is not removing the error. I think it is getting the first error (since document.querySelector returns the first matching element)
         return true;
     }   else {
-        email.style.borderColor = 'red';
-        const emailErrorLabel = document.createElement('label');
-        emailErrorLabel.classList.add('error');
-        emailErrorLabel.textContent = 'Please enter a valid email address';
-        email.insertAdjacentElement('afterend', emailErrorLabel);
+        // email.style.borderColor = 'red';
+        // const emailErrorLabel = document.createElement('label');
+        // emailErrorLabel.classList.add('error');
+        // emailErrorLabel.textContent = 'Please enter a valid email address';
+        // email.insertAdjacentElement('afterend', emailErrorLabel);
+        addError(email, 'email');
         return false;
     }
 
