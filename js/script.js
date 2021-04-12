@@ -200,6 +200,8 @@ function addError(parentElement, field) {
     parentElement.style.borderColor = 'red';
     const errorLabel = document.createElement('label');
     errorLabel.classList.add('error');
+    errorLabel.id = `${field}Error`;
+    console.log(`My error id is ${errorLabel.id}`);
     errorLabel.textContent = `Please enter a valid ${field}`;
     parentElement.insertAdjacentElement('afterend', errorLabel);
 }

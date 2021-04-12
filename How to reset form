@@ -33,7 +33,23 @@ I hope this helps answer your questions!
 
 Reply…
 
-
+Yeah, this is tricky because you need to be able to target different error 
+message elements depending on which field you're calling removeError on.  
+You can't say parentElement.querySelector('.error'); because parentElement 
+of what?  parentElement is a property that references the parent of an element.  
+So you need to refer to a specific element before you say parentElement.  
+But that approach won't work here anyway because of how the markup is 
+structered.  For example, for the name field, the parent element is the 
+fieldset, and that fieldset has to error elements.  For you approach to work,
+I would suggest adding to the removeError function a second parameter that
+can be used to reference the specific error element you want to target. 
+So when you call removeError, you'll pass in the element like nameInput, 
+and then a second argument that would refer to the associated error 
+element.  And you'd like need to make some changes to the removeError 
+function to get that to work correctly.
+Give that a try if you like, and if you run into trouble or get stuck, 
+go ahead and make a new post out in the public channel since this thread 
+is three weeks old.
 
 
 
