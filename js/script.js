@@ -35,6 +35,17 @@ nameInput.focus();
 const other = document.getElementById("other-title");
 other.style.display = "none";
 
+// Program the "Job Role" <select> element to listen for user changes. When a change is detected, display/hide the "text field" based on the user’s selection in the drop down menu.
+
+const title = document.getElementById("title");
+title.addEventListener('change', (event) => {
+    if (event.target.value == 'other') {
+        other.style.display = 'inline-block';
+    } else {
+        other.style.display = 'none';
+    }
+})
+
 // disable color select until Design selection is made
 const color = document.getElementById("color");
 color.disabled = true;
