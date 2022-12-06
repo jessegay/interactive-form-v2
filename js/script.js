@@ -54,7 +54,9 @@ const design = document.getElementById("design");
 design.addEventListener('change', (event) => {
     color.disabled = false;
     //Resets the color select to the placeholder (so when user changes theme, they are prompted to chose again)
-    //FIXME: Shouln't Color select now say "Please select a color"?
+    //FIXME: Shouln't Color select now say "Please select a color"? Maybe emulate the way initial placeholder text was created?
+    //create colorPlaceholder2, .text = 'Please select a color', colorPlaceholder2.disabled = true,
+    //colorPlaceholder2.hidden = true. Every time there is a change to design, selectedIndex = '1', colorPlaceholder2 becomes visible 
     color.selectedIndex = '0';
     //If user selects Puns, ♥ options are hidden
     if (event.target.value == 'js puns') {
