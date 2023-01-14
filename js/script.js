@@ -1,4 +1,4 @@
-// Create variable to store total cost. Does it need to be global?
+// Create variable to store total cost. Does it need to be global? 
 let totalCost = 0;
 
 // Variables to store form inputs
@@ -110,7 +110,7 @@ Some events are at the same day and time as others. If the user selects a worksh
 you should disable the checkbox and visually indicate that the workshop in the competing time slot isn't available.
 
 When a user unchecks an activity, make sure that competing activities (if there are any) are no longer disabled.
-// Up next
+//
 As a user selects activities, a running total should display below the list of checkboxes. 
 For example, if the user selects "Main Conference", then Total: $200 should appear. 
 If they add 1 workshop, the total should change to Total: $300.
@@ -160,7 +160,7 @@ As a user selects activities, a running total should display below the list
  to Total: $300.
 */
 
-/*
+/* 
 "Payment Info" section
 Display payment sections based on the payment option chosen in the select 
 menu. The "Credit Card" payment option should be selected by default. 
@@ -181,12 +181,13 @@ const payment = document.getElementById('payment');
 // Make "select method" unselectable
 payment[0].disabled = true;
 // Select Credit Card by default
-payment[1].selected = true;
+payment[0].selected = true;
 // store each payment div
 const creditCardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
 // hide options other than credit-card
+creditCardDiv.hidden = true;
 paypalDiv.hidden = true;
 bitcoinDiv.hidden = true;
 // Create array of all payment divs
@@ -194,15 +195,15 @@ const paymentDivs = [creditCardDiv, paypalDiv, bitcoinDiv];
 // Add event listener to it. Loop through paymentDivs. 
 // If paymentDivs[i].id == event.target.value, paymentDivs[i].hidden = false, else = true
 payment.addEventListener('change', (e) => {
-        var i;
-        for (i = 0; i < paymentDivs.length; i++) {
+        for (let i = 0; i < paymentDivs.length; i++) {
+            //console.log(e.target.value); //selection should show up in console. Done.
             if (paymentDivs[i].id.includes(e.target.value)) {
-                paymentDivs[i].hidden = false; 
-                } else {
-                    paymentDivs[i].hidden = true;
+                paymentDivs[i].hidden = false;
+                                } else {
+                    paymentDivs[i].hidden = true; 
                 }
             }
-    })
+    });
 
 
 // Validator helper functions.

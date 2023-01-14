@@ -7,5 +7,7 @@
 			"path": "../../Courses _Workshops_Practice/interactive-form-input-validation"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "interactive-form-v2"
+	}
 }
