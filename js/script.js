@@ -73,14 +73,14 @@ design.addEventListener('change', (event) => {
     if (event.target.value == 'js puns') {
         // loop through color and hide options whose text contains '♥' 
         var i;
-         for (i = 0; i < color.length; i++) {
+        for (i = 0; i < color.length; i++) {
             if (color.options[i].text.includes('♥')) {
                 color.options[i].hidden = true;
-            }   else {
+            } else {
                 color.options[i].hidden = false;
-            }                  
-        } 
-    }  
+            }
+        }
+    }
     //If user selects ♥, Puns options are hidden
     if (event.target.value == 'heart js') {
         // loop through color and hide options whose text contains puns
@@ -88,12 +88,12 @@ design.addEventListener('change', (event) => {
         for (i = 0; i < color.length; i++) {
             if (color.options[i].text.includes('Puns')) {
                 color.options[i].hidden = true;
-            }   else {
+            } else {
                 color.options[i].hidden = false;
-            }                  
+            }
         }
-    } 
-  
+    }
+
 })
 
 /*
@@ -122,7 +122,7 @@ document.querySelector('.activities').addEventListener('change', (e) => {
     totalCost = 0;
     const clicked = e.target;
     const clickedType = e.target.getAttribute('data-day-and-time');
-    for (let i = 0; i < checkboxes.length; i ++) {
+    for (let i = 0; i < checkboxes.length; i++) {
         let checkboxType = checkboxes[i].getAttribute('data-day-and-time');
         if (clickedType === checkboxType && clicked !== checkboxes[i]) {
             if (clicked.checked) {
@@ -181,13 +181,13 @@ const payment = document.getElementById('payment');
 // Make "select method" unselectable
 payment[0].disabled = true;
 // Select Credit Card by default
-payment[0].selected = true;
+payment[1].selected = true;
 // store each payment div
 const creditCardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
-// hide options other than credit-card
-creditCardDiv.hidden = true;
+// hide options other than credit-card 
+// creditCardDiv.hidden = true; 
 paypalDiv.hidden = true;
 bitcoinDiv.hidden = true;
 // Create array of all payment divs
@@ -195,99 +195,87 @@ const paymentDivs = [creditCardDiv, paypalDiv, bitcoinDiv];
 // Add event listener to it. Loop through paymentDivs. 
 // If paymentDivs[i].id == event.target.value, paymentDivs[i].hidden = false, else = true
 payment.addEventListener('change', (e) => {
-        for (let i = 0; i < paymentDivs.length; i++) {
-            //console.log(e.target.value); //selection should show up in console. Done.
-            if (paymentDivs[i].id.includes(e.target.value)) {
-                paymentDivs[i].hidden = false;
-                                } else {
-                    paymentDivs[i].hidden = true; 
-                }
-            }
-    });
+    for (let i = 0; i < paymentDivs.length; i++) {
+        //console.log(e.target.value); //selection should show up in console. Done.
+        if (paymentDivs[i].id.includes(e.target.value)) {
+            paymentDivs[i].hidden = false;
+        } else {
+            paymentDivs[i].hidden = true;
+        }
+    }
+});
 
 
 // Validator helper functions.
 
 // Error helper functions for Validators
 
-function addError(parentElement, field) {
-    parentElement.style.borderColor = 'red';
-    const errorLabel = document.createElement('label');
-    errorLabel.classList.add('error');
-    errorLabel.id = `${field}Error`;
-    console.log(`My error id is ${errorLabel.id}`);
-    errorLabel.textContent = `Please enter a valid ${field}`;
-    parentElement.insertAdjacentElement('afterend', errorLabel);
+function addError(element, field) {
+    element.style.borderColor = 'red';
+    // const errorLabel = element.querySelector('.error'); // why doesn't this work?
+    const errorLabel = element.querySelector(`#${element.id}Error`);
+    // :FIXME put the error creation in an if statement to prevent duplicates. Pseudocode: if there is no error attached to this input element, then add one. Otherwise do nothing.
+    if (!errorLabel) {
+        const errorLabel = document.createElement('label');
+        errorLabel.classList.add('error');
+        errorLabel.id = `${field}Error`;
+        errorLabel.htmlFor = element.id;
+        errorLabel.textContent = `Please enter a valid ${field}`;
+        element.insertAdjacentElement('afterend', errorLabel);
+    }
 }
 
-function removeError(parentElement) {
-    const errorLabel = document.querySelector('.error');
-    // I'd think const errorLabel = parentElement.querySelector('.error'); would ensure that only the correct error is selected, but it's not working
-    parentElement.style.borderColor = 'green';
-    if(errorLabel) {
-        errorLabel.parentNode.removeChild(errorLabel);
-        console.log(`${errorLabel.textContent} has been referenced`);
+function removeError(element) {
+    //const errorLabel = element.querySelector('label.error'); // why doesn't this work?
+    const errorLabel = document.querySelector(`#${element.id}Error`);
+    element.style.borderColor = 'green';
+    if (errorLabel) {
+        errorLabel.parentNode.removeChild(errorLabel); // could I also use errorLabel.remove(); ? Which is better?
     }
 }
 /* Helper function to validate name input */
 const nameValidator = () => {
     const userName = nameInput.value;
-    console.log(userName);
-
-    if(userName.length > 0) {
-        // const errorLabel = document.querySelector('.error');
-        // nameInput.style.borderColor = 'green';
-        // if(errorLabel) {
-        //     errorLabel.parentNode.removeChild(errorLabel);
-        // }
-        removeError(nameInput)
+    console.log(`${userName} is the userName. If blank there will be an error.`);
+    if (userName.length > 0) {
+        console.log('There is a userName. removeError should run');
+        removeError(nameInput);
         return true;
     } else {
-        // nameInput.style.borderColor = 'red';
-        // const nameErrorLabel = document.createElement('label');
-        // nameErrorLabel.classList.add('error');
-        // nameErrorLabel.textContent = 'Please enter a name';
-        // nameInput.insertAdjacentElement('afterend', nameErrorLabel);
         addError(nameInput, 'name');
         return false;
     }
 }
-// Event listener to quickly test validations. Do I want in final or is this just diagnostic?
-nameInput.addEventListener("keyup", () => {
-    nameValidator();
-})
+// Event listener to quickly test validations. Do I want in final or is this just diagnostic? It's annoying.
+// nameInput.addEventListener("keyup", () => {
+//     nameValidator();
+// })
 /* Helper function to validate email input */
 const emailValidator = () => {
     const emailValue = email.value;
     const indexOfAt = emailValue.indexOf('@');
     const indexOfDot = emailValue.lastIndexOf('.');
     // check to see if email value has an @ before .
-    if (indexOfAt > 1 && indexOfDot > (indexOfAt +1)) {
+    if (indexOfAt >= 1 && indexOfDot > (indexOfAt + 1)) {
         removeError(email);
-        //FIXME: removeError is not removing the error. I think it is getting the first error (since document.querySelector returns the first matching element)
         return true;
-    }   else {
-        // email.style.borderColor = 'red';
-        // const emailErrorLabel = document.createElement('label');
-        // emailErrorLabel.classList.add('error');
-        // emailErrorLabel.textContent = 'Please enter a valid email address';
-        // email.insertAdjacentElement('afterend', emailErrorLabel);
+    } else {
         addError(email, 'email');
         return false;
     }
-
 }
 
 /* Helper function to validate that at least 1 activity has been selected*/
-
+// FIXME: If an activity is selected, but there is an error in another field, pressing submit clears all fields.
 const activitiesValidator = () => {
-    for (let i = 0; i < activitiesInputs.length; i ++ ) {
+    for (let i = 0; i < activitiesInputs.length; i++) {
         if (activitiesInputs[i].checked) {
             console.log('You have picked an activity');
             return true;
-            } 
-        }   
+        }
+    }
     //This will run only if the loop concludes without finding any checked activites.
+    // FIXME: refactor using error functions once I get them working.
     activitiesFieldset.style.backgroundColor = 'red';
     const activitiesErrorLabel = document.createElement('label');
     activitiesErrorLabel.classList.add('error');
@@ -328,7 +316,7 @@ const zipValidator = () => {
 }
 
 const cvvValidator = () => {
-    const cvv = document.querySelector('#cvv');   
+    const cvv = document.querySelector('#cvv');
     if (cvv.value.length === 3 && typeof parseInt(cvv.value) === 'number') {
         return true;
     } else {
@@ -362,20 +350,21 @@ form.addEventListener('submit', (e) => {
         e.preventDefault();
         console.log('You must select at least one Activity');
     }
-    // Do the creditCard checks need to be in their own branch, or is this OK since they'll only be called if credit-card is selected?
-    else if  (!isValidCreditCardNumber) {
+    // Do the creditCard checks need to be in their own branch (e.g. if payment[1].selected = true;), or is this OK since they'll only be called if credit-card is selected?
+    // Should error messages be separate lines in these branches, or better to leave them in the CC validator functions themselves?
+    else if (!isValidCreditCardNumber) {
         e.preventDefault();
-    }    
-    else if  (!isValidZip) {
+    }
+    else if (!isValidZip) {
         e.preventDefault();
-    } 
-    else if  (!isValidCVV) {
+    }
+    else if (!isValidCVV) {
         e.preventDefault();
-    } 
+    }
 
 
     else {
         console.log('inputs look good');
     }
 
-}    );
+});
